@@ -17,6 +17,161 @@
     justify-content: center;
     padding: 24px;
   }
+
+  /* ── Nav bar ────────────────────────────────── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    background: #111827;
+    border-bottom: 1px solid #374151;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 100;
+  }
+  .nav-brand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f9fafb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .hamburger:hover { background: #1f2937; }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Drawer ─────────────────────────────────── */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: all; }
+  .drawer {
+    position: fixed;
+    top: 0; right: 0;
+    width: 320px;
+    max-width: 90vw;
+    height: 100%;
+    background: #111827;
+    border-left: 1px solid #374151;
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #374151;
+    flex-shrink: 0;
+  }
+  .drawer-header h2 { font-size: 1rem; font-weight: 700; color: #f9fafb; }
+  .drawer-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .drawer-close:hover { background: #1f2937; color: #f9fafb; }
+  .drawer-search {
+    padding: 12px 16px;
+    border-bottom: 1px solid #374151;
+    flex-shrink: 0;
+  }
+  .drawer-search input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    background: #1f2937;
+    color: #e5e7eb;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    outline: none;
+  }
+  .drawer-search input:focus { border-color: #3b82f6; }
+  .drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+  }
+  .drawer-section-label {
+    padding: 6px 20px 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #6b7280;
+  }
+  .drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: background 0.12s;
+    overflow: hidden;
+  }
+  .drawer-link:hover { background: #1f2937; color: #f9fafb; }
+  .drawer-link .icon { flex-shrink: 0; width: 18px; text-align: center; }
+  .drawer-link .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .drawer-link .badge {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    background: #1f2937;
+    border: 1px solid #374151;
+    color: #9ca3af;
+    padding: 1px 6px;
+    border-radius: 20px;
+  }
+  .drawer-status {
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+  .drawer-status.error { color: #f87171; }
+
+  /* ── Main card ──────────────────────────────── */
   .card {
     background: #111827;
     border: 1px solid #374151;
@@ -25,6 +180,7 @@
     max-width: 640px;
     width: 100%;
     text-align: center;
+    margin-top: 52px;
   }
   .logo { font-size: 3rem; margin-bottom: 8px; }
   h1 { font-size: 2rem; font-weight: 700; color: #f9fafb; margin-bottom: 8px; }
@@ -55,10 +211,84 @@
     transition: background 0.15s;
   }
   .links a:hover { background: #1d4ed8; }
+
+  /* ── Repo network strip ─────────────────────── */
+  .network {
+    margin-top: 28px;
+    text-align: left;
+  }
+  .network-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #6b7280;
+    margin-bottom: 10px;
+  }
+  .repo-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 32px;
+  }
+  .repo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    padding: 4px 10px;
+    border: 1px solid #374151;
+    border-radius: 20px;
+    color: #93c5fd;
+    background: #1f2937;
+    text-decoration: none;
+    transition: background 0.12s, border-color 0.12s;
+    white-space: nowrap;
+  }
+  .repo-chip:hover { background: #1d4ed8; border-color: #3b82f6; }
+  .repo-chips-loading { color: #6b7280; font-size: 0.82rem; }
+
   footer { margin-top: 20px; color: #6b7280; font-size: 0.8rem; }
 </style>
 </head>
 <body>
+
+<!-- ── Navigation bar ────────────────────────────── -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-brand">
+    <span aria-hidden="true">∞</span> -spawn
+  </div>
+  <button class="hamburger" id="menuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── Drawer overlay ────────────────────────────── -->
+<div class="drawer-overlay" id="drawerOverlay" role="presentation"></div>
+
+<!-- ── Slide-out drawer ──────────────────────────── -->
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Repository navigation">
+  <div class="drawer-header">
+    <h2>∞ www-infinity</h2>
+    <button class="drawer-close" id="drawerClose" aria-label="Close navigation menu">✕</button>
+  </div>
+  <div class="drawer-search">
+    <input type="search" id="drawerFilter" placeholder="Filter repos…" aria-label="Filter repositories" />
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <div class="drawer-section-label">This site</div>
+    <a class="drawer-link" href="search_results/">
+      <span class="icon">🔎</span><span class="name">Search Results</span>
+    </a>
+    <a class="drawer-link" href="https://github.com/www-infinity/-spawn" target="_blank" rel="noopener">
+      <span class="icon">⚙️</span><span class="name">-spawn on GitHub</span>
+    </a>
+    <div class="drawer-section-label" style="margin-top:8px">All repositories</div>
+    <div id="repoList"><div class="drawer-status">Loading repos…</div></div>
+  </div>
+</aside>
+
+<!-- ── Main content ──────────────────────────────── -->
 <div class="card">
   <div class="logo">∞</div>
   <h1>-spawn</h1>
@@ -71,9 +301,124 @@
   </div>
   <div class="links">
     <a href="search_results/">Search Results</a>
-    <a href="https://github.com/www-infinity/-spawn">GitHub</a>
+    <a href="https://github.com/www-infinity/-spawn" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="network">
+    <div class="network-label">Repository network</div>
+    <div class="repo-chips" id="repoChips">
+      <span class="repo-chips-loading">Loading…</span>
+    </div>
   </div>
 </div>
 <footer>www-infinity · -spawn</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Helpers ──────────────────────────────────── */
+  function esc(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  /* ── Hamburger / drawer ───────────────────────── */
+  var menuBtn       = document.getElementById('menuBtn');
+  var drawer        = document.getElementById('drawer');
+  var drawerOverlay = document.getElementById('drawerOverlay');
+  var drawerClose   = document.getElementById('drawerClose');
+  var drawerFilter  = document.getElementById('drawerFilter');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    drawerOverlay.classList.add('open');
+    menuBtn.classList.add('open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    drawerClose.focus();
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    drawerOverlay.classList.remove('open');
+    menuBtn.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.focus();
+  }
+
+  menuBtn.addEventListener('click', function () {
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+
+  /* ── Fetch repos from GitHub API ─────────────── */
+  var allRepos = [];
+
+  function renderDrawerRepos(repos) {
+    var list = document.getElementById('repoList');
+    if (!repos.length) {
+      list.innerHTML = '<div class="drawer-status">No repositories found.</div>';
+      return;
+    }
+    list.innerHTML = repos.map(function (r) {
+      var stars = r.stargazers_count > 0
+        ? '<span class="badge">★ ' + r.stargazers_count + '</span>'
+        : '';
+      return '<a class="drawer-link" href="' + esc(r.html_url) + '" target="_blank" rel="noopener">'
+        + '<span class="icon">🗂️</span>'
+        + '<span class="name">' + esc(r.name) + '</span>'
+        + stars
+        + '</a>';
+    }).join('');
+  }
+
+  function renderChips(repos) {
+    var chips = document.getElementById('repoChips');
+    if (!repos.length) {
+      chips.innerHTML = '<span class="repo-chips-loading">No repos found.</span>';
+      return;
+    }
+    chips.innerHTML = repos.map(function (r) {
+      return '<a class="repo-chip" href="' + esc(r.html_url) + '" target="_blank" rel="noopener">'
+        + '🗂️ ' + esc(r.name)
+        + '</a>';
+    }).join('');
+  }
+
+  function loadRepos() {
+    fetch('https://api.github.com/users/www-infinity/repos?per_page=100&sort=updated')
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        allRepos = data.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+        });
+        renderDrawerRepos(allRepos);
+        renderChips(allRepos);
+      })
+      .catch(function () {
+        document.getElementById('repoList').innerHTML =
+          '<div class="drawer-status error">Could not load repos.</div>';
+        document.getElementById('repoChips').innerHTML =
+          '<span class="repo-chips-loading">Could not load repos.</span>';
+      });
+  }
+
+  /* ── Drawer filter ────────────────────────────── */
+  drawerFilter.addEventListener('input', function () {
+    var q = drawerFilter.value.toLowerCase();
+    renderDrawerRepos(q
+      ? allRepos.filter(function (r) { return r.name.toLowerCase().includes(q); })
+      : allRepos);
+  });
+
+  loadRepos();
+})();
+</script>
 </body>
 </html>
