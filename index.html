@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>∞ -spawn</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #0b1220;
+    color: #e5e7eb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 40px 48px;
+    max-width: 640px;
+    width: 100%;
+    text-align: center;
+  }
+  .logo { font-size: 3rem; margin-bottom: 8px; }
+  h1 { font-size: 2rem; font-weight: 700; color: #f9fafb; margin-bottom: 8px; }
+  .subtitle { color: #9ca3af; margin-bottom: 32px; font-size: 1rem; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .tile {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    padding: 16px 12px;
+    font-size: 0.85rem;
+    color: #d1d5db;
+  }
+  .tile span { display: block; font-size: 1.5rem; margin-bottom: 6px; }
+  .links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .links a {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border: 1px solid #3b82f6;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .links a:hover { background: #1d4ed8; }
+  footer { margin-top: 20px; color: #6b7280; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">∞</div>
+  <h1>-spawn</h1>
+  <p class="subtitle">Infinity machine. Every run creates a new instance.</p>
+  <div class="grid">
+    <div class="tile"><span>🧱</span>Self Building</div>
+    <div class="tile"><span>🔎</span>Search Engine</div>
+    <div class="tile"><span>🌐</span>Pages</div>
+    <div class="tile"><span>⚙️</span>Automation</div>
+  </div>
+  <div class="links">
+    <a href="search_results/">Search Results</a>
+    <a href="https://github.com/www-infinity/-spawn">GitHub</a>
+  </div>
+</div>
+<footer>www-infinity · -spawn</footer>
+</body>
+</html>
