@@ -1,0 +1,3 @@
+# search_results/
+# Each file here is one committed search: <id>_<slug>.md
+# Use cart_search_commit.sh (or search_engine/search_commit.py) to add entries.
