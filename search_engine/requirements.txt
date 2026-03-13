@@ -1,0 +1,4 @@
+# C13B0 Search Commit Engine — Python dependencies
+ddgs>=9.0.0
+requests>=2.32.3
+beautifulsoup4>=4.12.3
