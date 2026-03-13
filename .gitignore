@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node
+node_modules/
+.next/
+dist/
+.env.local
+.env
+
+# Build artifacts
+build/
+out/
+
+# Temp
+.tmp_scan/
+c13b0_evolution_chamber/
+c13b0_organic_cart/
+c13b0_*_chamber/
+.c13b0_*/
