@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>∞ Search Results — -spawn</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #0b1220;
+    color: #e5e7eb;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+  .header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .back {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border: 1px solid #3b82f6;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .back:hover { background: #1d4ed8; }
+  h1 { font-size: 1.6rem; font-weight: 700; color: #f9fafb; }
+  .subtitle { color: #9ca3af; font-size: 0.9rem; margin-bottom: 24px; }
+  .search-bar {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    background: #111827;
+    color: #e5e7eb;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    outline: none;
+    margin-bottom: 20px;
+  }
+  .search-bar:focus { border-color: #3b82f6; }
+  .result-card {
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .result-card .query { font-weight: 600; color: #f9fafb; margin-bottom: 4px; }
+  .result-card .meta { font-size: 0.8rem; color: #6b7280; }
+  .result-card .meta span { margin-right: 12px; }
+  .empty { text-align: center; color: #6b7280; padding: 48px 0; }
+  .empty .icon { font-size: 2.5rem; margin-bottom: 10px; }
+  .empty .hint { margin-top: 8px; font-size: 0.85rem; }
+  footer { margin-top: 32px; color: #6b7280; font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a class="back" href="../">← Home</a>
+    <h1>🔎 Search Results</h1>
+  </div>
+  <p class="subtitle">All searches committed by the C13B0 Search Engine.</p>
+  <input class="search-bar" id="q" aria-label="Filter saved searches" placeholder="Filter saved searches…" oninput="filter()" />
+  <div id="results"></div>
+  <div id="empty" class="empty" style="display:none">
+    <div class="icon">📭</div>
+    <p>No saved searches yet.</p>
+    <p class="hint">Run: <code>./cart_search_commit.sh search &lt;query&gt;</code></p>
+  </div>
+</div>
+<footer>www-infinity · -spawn</footer>
+<script>
+let all = [];
+
+fetch('index.json')
+  .then(r => r.ok ? r.json() : [])
+  .then(data => {
+    all = data || [];
+    render(all);
+  })
+  .catch(() => render([]));
+
+function render(items) {
+  const container = document.getElementById('results');
+  const empty = document.getElementById('empty');
+  container.innerHTML = '';
+  if (!items.length) {
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML =
+      '<div class="query">' + esc(item.query) + '</div>' +
+      '<div class="meta">' +
+        '<span><span aria-label="Search ID">🔑</span> ' + esc(item.id) + '</span>' +
+        '<span><span aria-label="Date">📅</span> ' + esc(item.timestamp) + '</span>' +
+        '<span><span aria-label="Result count">📄</span> ' + (item.result_count || 0) + ' results</span>' +
+      '</div>';
+    container.appendChild(card);
+  });
+}
+
+function filter() {
+  const q = document.getElementById('q').value.toLowerCase();
+  render(q ? all.filter(x => x.query.toLowerCase().includes(q) || x.id.toLowerCase().includes(q)) : all);
+}
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
